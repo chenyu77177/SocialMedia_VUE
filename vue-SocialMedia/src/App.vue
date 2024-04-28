@@ -10,9 +10,9 @@ import HelloWorld from './components/HelloWorld.vue'
       <!-- <HelloWorld msg="Title-------------------" /> -->
 
       <nav>
-        <RouterLink to="/">Home</RouterLink>
-        <RouterLink to="/about">About</RouterLink>
-        <RouterLink to="/login">Login</RouterLink>
+        <RouterLink to="/">首頁</RouterLink>
+        <RouterLink to="/NewPost">新增貼文</RouterLink>
+        <RouterLink to="/login">登入</RouterLink>
       </nav>
     </div>
     
@@ -36,11 +36,12 @@ nav {
   width: 100%;
   font-size: 12px;
   text-align: center;
-  margin-top: 2rem;
+  margin-top: 1rem;
 }
 
 nav a.router-link-exact-active {
-  color: var(--color-text);
+  color: black;
+  font-weight: bold;
 }
 
 nav a.router-link-exact-active:hover {
@@ -51,6 +52,8 @@ nav a {
   /* display: inline-block; */
   padding: 0 1rem;
   border-left: 1px solid var(--color-border);
+  color: gray;
+  text-decoration: none;
 }
 
 nav a:first-of-type {
@@ -75,8 +78,8 @@ nav a:first-of-type {
   }
 
   nav {
-    text-align: left;
-    margin-left: -1rem;
+    text-align: center;
+    /* margin-left: -1rem; */
     font-size: 1rem;
 
     padding: 1rem 0;
