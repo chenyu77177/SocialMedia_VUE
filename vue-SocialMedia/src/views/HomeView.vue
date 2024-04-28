@@ -1,19 +1,30 @@
 <template>
   <div id="app">
-    <Login />
+    <Home />
   </div>
 </template>
 
 <script>
-import Login from '../components/Home.vue';
+import Home from '../components/Home.vue';
 
 export default {
   components: {
-    Login
+    Home
   }
 };
 </script>
 
 <style>
+  .card{
+    margin-bottom: 10px;
+    width: 60vw;
+  }
 
+  .comment_count{
+    color: gray;
+  }
+
+  .comment_count{
+    
+  }
 </style>
