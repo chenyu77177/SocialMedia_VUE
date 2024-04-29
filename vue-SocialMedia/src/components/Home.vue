@@ -4,12 +4,12 @@
     <div>
         <div v-for="post in posts" :key="post.id" class="card" >
         <div class="card-body">
-            <h5 class="card-title mb-2">user</h5>
+            <h5 class="card-title mb-2">{{post.user.username}}</h5>
             <p class="card-text">{{ post.content }}</p>
             <p class="comment_count">共 {{ post.comments.length }} 則回覆</p>
             <hr>
             <ul class="list-group list-group-flush" v-for="comment in post.comments" :key="comment.id">
-                <li class="list-group-item bg-light">xxx：{{ comment.content }}</li>
+                <li class="list-group-item bg-light"><span>{{comment.user.username}}</span>：<span>{{ comment.content }}</span></li>
             </ul>
             <div class="row mt-3">
                 <div class="col-10">
