@@ -1,6 +1,6 @@
 <template>
     <div id="app">
-      <Home />
+      <NewPost />
     </div>
   </template>
   
