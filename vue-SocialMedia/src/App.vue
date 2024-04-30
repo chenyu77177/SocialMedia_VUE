@@ -8,7 +8,6 @@ import HelloWorld from './components/HelloWorld.vue'
   <header>
     <div>
       <!-- <HelloWorld msg="Title-------------------" /> -->
-
       <nav>
         <RouterLink to="/">首頁</RouterLink>
         <RouterLink to="/NewPost">新增貼文</RouterLink>
