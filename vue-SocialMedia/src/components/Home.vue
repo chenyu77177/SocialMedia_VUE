@@ -11,7 +11,7 @@
             <ul class="list-group list-group-flush" v-for="comment in post.comments" :key="comment.id">
                 <li class="list-group-item bg-light"><span>{{comment.user.username}}</span>：<span>{{ comment.content }}</span></li>
             </ul>
-            <div class="row mt-3">
+            <div class="row mt-3" v-if="isLogin">
                 <div class="col-10">
                     <input type="text" class="form-control">
                 </div>
@@ -27,24 +27,30 @@
 
 <script>
     import axios from 'axios';
+    import store from '@/store';
 
     export default {
     data() {
         return {
-            posts: []
+            posts: [],
+            isLogin: false
         };
     },
     mounted() {
         this.fetchPosts();
+        this.checkLoginState();
     },
     methods: {
         async fetchPosts() {
-        try {
-            const response = await axios.get('http://localhost:8080/api/posts');
-            this.posts = response.data;
-        } catch (error) {
-            console.error('Error fetching posts:', error);
-        }
+            try {
+                const response = await axios.get(store.state.domain + '/api/posts');
+                this.posts = response.data;
+            } catch (error) {
+                console.error('Error fetching posts:', error);
+            }
+        },
+        checkLoginState(){
+            this.isLogin = this.$cookies.isKey("uid");
         }
     }
     };
