@@ -1,6 +1,6 @@
 <script setup>
-import { RouterLink, RouterView } from 'vue-router'
-import HelloWorld from './components/HelloWorld.vue'
+import { RouterLink, RouterView } from 'vue-router';
+import HelloWorld from './components/HelloWorld.vue';
 
 </script>
 
@@ -11,7 +11,8 @@ import HelloWorld from './components/HelloWorld.vue'
       <nav>
         <RouterLink to="/">首頁</RouterLink>
         <RouterLink to="/NewPost">新增貼文</RouterLink>
-        <RouterLink to="/login">登入</RouterLink>
+        <RouterLink to="/login">登入/登出</RouterLink>
+        <RouterLink to="/register">註冊</RouterLink>
       </nav>
     </div>
     
