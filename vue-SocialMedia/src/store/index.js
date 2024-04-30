@@ -2,6 +2,7 @@ import { createStore } from "vuex";
 
 export default createStore({
     state:{
+        domain: "http://localhost:8080",
         count:0,
         userId: null,
         loginState: false

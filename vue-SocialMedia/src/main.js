@@ -5,12 +5,12 @@ import App from './App.vue'
 import router from './router'
 import 'bootstrap/dist/css/bootstrap.css'
 import store from './store'
-// import axios from 'axios'
+import VueCookies from 'vue-cookies'
 
 const app = createApp(App)
 
 app.use(router)
-// app.use(axios)
 app.use(store)
+app.use(VueCookies)
 
 app.mount('#app')
