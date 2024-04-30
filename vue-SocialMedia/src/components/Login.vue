@@ -48,10 +48,12 @@ export default {
         console.log(response.data.user_id);
         const user_id = response.data.user_id;
         const login_state = response.data.state;
+        const username = response.data.username;
         store.commit('setUserId', user_id); // 將 user_id 存儲到 Vuex store 中
         store.commit('setLoginState', login_state); // 將 state 存儲到 Vuex store 中
         if(login_state){
           this.$cookies.set("uid", user_id, {expires: "1D"});
+          this.$cookies.set("username", username, {expires: "1D"});
           this.alertMSG = "登入成功";
           this.alertToggleState = true;
           console.log('Login successful');
@@ -68,6 +70,7 @@ export default {
     },
     logout(){
       this.$cookies.remove("uid");
+      this.$cookies.remove("username");
       window.location.reload();
     }
   }
