@@ -4,6 +4,46 @@ import HelloWorld from './components/HelloWorld.vue';
 
 </script>
 
+<script>
+  import axios from 'axios';
+  import { getCurrentInstance } from 'vue';
+  import store from './store';
+
+  export default {
+      data() {
+          return {
+              userId: '',
+          };
+      },
+      mounted() {
+          this.getUserData();
+          if(this.userId != null){
+            this.userIdCheck();
+          }
+      },
+      methods: {
+          async userIdCheck() {
+              try {
+                  const response = await axios.get(store.state.domain + '/api/user/idCheck?user_id=' + this.userId);
+                  const result = response.data;
+                  if(!result){
+                      console.log('移除cookie');
+                      this.$cookies.remove('uid');
+                      this.$cookies.remove('username');
+                  }
+              } catch (error) {
+                  console.error('Error id check:', error);
+              }
+          },
+          getUserData(){
+              const internalInstance = getCurrentInstance();
+              const internalData = internalInstance.appContext.config.globalProperties;
+              this.userId = internalData.$cookies.get('uid');
+          },
+      }
+  };
+</script>
+
 <template>
   <header>
     <div>
