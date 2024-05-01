@@ -27,4 +27,9 @@ export default {
   .comment_count{
     
   }
+
+  .scoll{
+    height: 35vh;
+    overflow-y:auto;
+  }
 </style>
