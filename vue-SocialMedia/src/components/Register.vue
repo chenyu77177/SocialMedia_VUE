@@ -69,7 +69,7 @@
                 username: this.username,
                 biography: this.biography
                 });
-                console.log(response);
+                // console.log(response);
                 const result = response.data;
                 if(result != null || result != ""){
                     this.alertMSG = "註冊成功!";

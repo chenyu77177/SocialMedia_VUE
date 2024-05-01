@@ -6,8 +6,6 @@
     </div>
     <div v-if="this.$cookies.isKey('uid') == false">
       <h5>登入</h5>
-      <!-- <p>userId:{{ $store.state.userId }}</p>
-      <p>userState:{{ $store.state.loginState }}</p> -->
       <form @submit.prevent="login">
         <label for="phone">電話</label>
         <input type="text" class="form-control" id="phone" v-model="phone" placeholder="電話" required>
@@ -44,13 +42,13 @@ export default {
           phone: this.phone,
           password: this.password,
         });
-        console.log(response);
-        console.log(response.data.user_id);
+        // console.log(response);
+        // console.log(response.data.user_id);
         const user_id = response.data.user_id;
         const login_state = response.data.state;
         const username = response.data.username;
         store.commit('setUserId', user_id); // 將 user_id 存儲到 Vuex store 中
-        store.commit('setLoginState', login_state); // 將 state 存儲到 Vuex store 中
+        store.commit('setLoginState', login_state); // 將 login_state 存儲到 Vuex store 中
         if(login_state){
           this.$cookies.set("uid", user_id, {expires: "1D"});
           this.$cookies.set("username", username, {expires: "1D"});
