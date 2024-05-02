@@ -2,9 +2,17 @@
     <div>
     <h1>貼文</h1>
     <div>
-        <div v-for="post in posts" :key="post.id" class="card" >
+        <div v-for="post in posts" :key="post.id" class="card post_card" >
         <div class="card-body">
-            <h5 class="card-title mb-2">{{post.user.username}}</h5>
+            <div class="row">
+                <div class="col-10">
+                    <h5 class="card-title mb-2">{{post.user.username}}</h5>
+                </div>
+                <div class="col-2 text-end" v-if="post.user.user_id == userId">
+                    <i class="bi bi-pencil-square mx-2 text-secondary"></i>
+                    <i class="bi bi-trash text-danger" data-bs-toggle="modal" data-bs-target="#removeModal" @click="getPostById(post.post_id)"></i>
+                </div>
+            </div>
             <p class="card-text">{{ post.content }}</p>
             <p class="comment_count" data-bs-toggle="modal" data-bs-target="#exampleModal" @click="getPostById(post.post_id)"><i class="bi bi-chat-dots"></i> {{ post.comments.length }}</p>
             <hr>
@@ -53,12 +61,36 @@
     </div>
   </div>
 </div>
+<!-- Remove Modal -->
+<div class="modal fade" id="removeModal" tabindex="-1" aria-labelledby="removeModalLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h1 class="modal-title fs-5" id="removeModalLabel">移除貼文</h1>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+          <p>確認要移除貼文嗎?</p>
+          <div class="card p-2">
+              <p class="text-secondary text-center m-0">預覽</p>
+              <hr class="m-2">
+              {{ singlePosts.content }}
+          </div>
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">取消</button>
+        <button type="button" class="btn btn-danger" @click="removePost(singlePosts.post_id)">移除</button>
+      </div>
+    </div>
+  </div>
+</div>
 </template>
 
 <script>
     import axios from 'axios';
     import store from '@/store';
     import { getCurrentInstance } from 'vue';
+    import bootstrap from 'bootstrap/dist/js/bootstrap.min.js';
 
     export default {
         data() {
@@ -123,6 +155,22 @@
                     }
                 } catch (error) {
                     console.error('Error add comment:', error);
+                }
+            },
+            async removePost(postId){
+                try {
+                    const response = await axios.delete(store.state.domain + '/api/post/remove/' + postId + '?user_id=' + this.userId);
+                    if(response.data == 'success'){
+                        console.log('貼文移除成功');
+                        this.fetchPosts();
+                        const myModalEl = document.getElementById('removeModal');
+                        const modal = bootstrap.Modal.getInstance(myModalEl)
+                        modal.hide();
+                    }else{
+                        console.log('貼文移除失敗');
+                    }
+                } catch (error) {
+                    console.error('Error remove fail', error)
                 }
             }
         }

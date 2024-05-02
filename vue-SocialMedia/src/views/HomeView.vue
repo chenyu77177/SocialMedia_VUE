@@ -15,7 +15,7 @@ export default {
 </script>
 
 <style>
-  .card{
+  .post_card{
     margin-bottom: 10px;
     width: 60vw;
   }
